@@ -1,6 +1,7 @@
 # Trabalho final de TI
 
-## PROJETO: Casas Potiguar
+## PROJETO: Casas Potiguar 
+![Logo](images/CSPT.png)
 
 Uma loja online de produtos para casa como móveis, lâmpadas, utensílios, utilitários ...
 Que busca os melhores preços dentre diversos sites e te indica o melhor lugar para comprar.
