@@ -7,7 +7,7 @@ Que busca os melhores preços dentre diversos sites e te indica o melhor lugar p
 
 ## Diagrama:
 
-![diagramaDeCaso](https://drive.google.com/file/d/1gVAkhQD_GK-W4ZacQooIULeU9fedRYq5/view?usp=drive_link)
+https://drive.google.com/file/d/1gVAkhQD_GK-W4ZacQooIULeU9fedRYq5/view?usp=drive_link
 
 ## Equipe:
 
