@@ -32,3 +32,30 @@ try {
 } catch (error: any) {
     console.error(error.message); // Imprime: "O nome do produto deve ter pelo menos 3 caracteres."
 }
+
+const sofá = new Produto(
+    "1", 
+    "Sofá Living 3 Lugares",
+    " Linho Resistente Madeira + Almofadas",
+    700,
+    "sala",
+    "imagem do sofá"
+);
+
+console.log(sofá.preco); 
+sofá.preco = 300; 
+console.log(sofá.preco); 
+
+try {
+    sofá.preco = -100;
+} catch (error: any) {
+    console.error(error.message); 
+    console.log(sofá.preco);   
+}
+
+
+try {
+    sofá.nome = "AB"; 
+} catch (error: any) {
+    console.error(error.message); 
+}
