@@ -28,3 +28,4 @@ João Lucas: Front-end
 
 Israel Ahmed: QA Testes
 
+Mattheus Isaac: Jest Testes
