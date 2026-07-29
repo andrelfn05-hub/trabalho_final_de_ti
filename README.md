@@ -8,7 +8,7 @@
 
 <p>
   &nbsp;&nbsp;&nbsp;
-  <img src="images/Potiguarzinho_2.0-SF.png" alt="Mascote Potiguarzinho" width="220"/>
+  <img src="images/ChatGPT_Image_29_de_jul._de_2026__14_15_20-removebg-preview.png" alt="Mascote Potiguarzinho" width="260"/>
 </p>
 
 Uma loja online de produtos para casa como móveis, lâmpadas, utensílios, utilitários ...
