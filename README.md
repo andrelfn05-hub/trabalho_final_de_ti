@@ -28,3 +28,12 @@ João Lucas: Front-end
 
 Israel Ahmed: QA Testes
 
+## Tecnologias Utilizadas:
+
+-Typescript
+
+-Javascript
+
+-CSS
+
+-EJS
