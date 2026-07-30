@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { ProductController } from "./controllers/ProductController";
-import { AuthGuard } from "./middlewares/AuthGuard";
+import { ProductController } from "../controllers/ProdutoController";
+import AuthGuard from "../middlewares/authGuard";
 
 const router = Router();
 
