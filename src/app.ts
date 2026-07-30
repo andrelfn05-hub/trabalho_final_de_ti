@@ -24,9 +24,4 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
-// Rota de teste
-app.get("/", (req, res) => {
-    res.send("Bem-vindo à Casas Potiguar!");
-});
-
 export default app;

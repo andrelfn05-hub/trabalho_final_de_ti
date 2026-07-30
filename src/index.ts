@@ -1,5 +1,5 @@
-// Importa a classe do outro arquivo
-import { Produto } from "../entities/Produto";
+// Importa a classe do outro arquiv
+import { Produto } from "./entities/Produto";
 
 
 // Criando o produto com as informações reais

@@ -1,0 +1,37 @@
+<%- include('../layouts/header') %>
+<%- include('../layouts/menu') %>
+
+<h2>Comparador de Preços - Casas Potiguar</h2>
+
+<div class="form-group">
+  <input 
+    type="text" 
+    id="inputBusca" 
+    placeholder="Buscar produtos (ex: Cama Box, Armário...)" 
+    oninput="buscarProdutosComDebounce(this.value)"
+  >
+</div>
+
+<div id="loading" class="loading-spinner"></div>
+
+<div id="gridProdutos" class="grid-produtos">
+  <% if (typeof produtos !== 'undefined' && produtos.length > 0) { %>
+    <% produtos.forEach(produto => { %>
+      <div class="card-produto" id="card-<%= produto.id %>">
+        <img src="<%= produto.imagemUrl || '/uploads/default.jpg' %>" alt="<%= produto.nome %>">
+        <h3><%= produto.nome %></h3>
+        <p>Menor Preço: <strong>R$ <%= produto.menorPreco %></strong></p>
+        
+        <div class="acoes">
+          <a href="/produtos/<%= produto.id %>" class="btn-primary">Ver Ofertas</a>
+          <button onclick="deletarProduto('<%= produto.id %>')" class="btn-danger">Excluir</button>
+        </div>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>Nenhum produto encontrado.</p>
+  <% } %>
+</div>
+
+<script src="/js/produtos.js"></script>
+<%- include('../layouts/footer') %>

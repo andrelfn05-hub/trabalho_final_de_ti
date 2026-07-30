@@ -1,29 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<%- include('./layouts/header') %>
 
-<head>
-    <meta charset="UTF-8">
-    <title>Casas Potiguar</title>
+<div style="padding: 40px 0;">
+  <h2>Bem-vindo ao Casas Potiguar</h2>
+  <p>O seu comparador de preços de produtos para o lar!</p>
 
-    <link rel="stylesheet" href="/css/style.css">
-</head>
+  <div class="acoes-home" style="margin-top: 25px;">
+    <a href="/produtos" class="btn-primary">Ver Comparador de Produtos</a>
+  </div>
+</div>
 
-<body>
-
-    <%- include("layouts/header") %>
-
-    <%- include("layouts/menu") %>
-
-    <main>
-
-        <h2>Bem-vindo!</h2>
-
-        <p>Loja online Casas Potiguar.</p>
-
-    </main>
-
-    <%- include("layouts/footer") %>
-
-</body>
-
-</html>
+<%- include('./layouts/footer') %>
