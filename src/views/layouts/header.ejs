@@ -1,3 +1,25 @@
-<header>
-    <h1>Casas Potiguar</h1>
-</header>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casas Potiguar - Comparador de Preços</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <a href="/">🏡 <strong>Casas Potiguar</strong></a>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/produtos/novo">Cadastrar Produto</a>
+      <% if (typeof user !== 'undefined' && user) { %>
+        <span class="user-welcome">Olá, <%= user.nome %></span>
+        <a href="/auth/logout" class="btn-secondary">Sair</a>
+      <% } else { %>
+        <a href="/login" class="btn-primary">Entrar / Cadastrar</a>
+      <% } %>
+    </nav>
+  </header>
+  <main class="container">
