@@ -1,12 +1,194 @@
-<%- include('./layouts/header') %>
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<div style="padding: 40px 0;">
-  <h2>Bem-vindo ao Casas Potiguar</h2>
-  <p>O seu comparador de preços de produtos para o lar!</p>
+<head>
 
-  <div class="acoes-home" style="margin-top: 25px;">
-    <a href="/produtos" class="btn-primary">Ver Comparador de Produtos</a>
-  </div>
-</div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<%- include('./layouts/footer') %>
+    <title>Casas Potiguar</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+    <%- include("layouts/header") %>
+
+    <%- include("layouts/menu") %>
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-text">
+
+                <span class="tag">Móveis • Qualidade • Economia</span>
+
+                <h1>
+                    Encontre os melhores móveis para sua casa
+                </h1>
+
+                <p>
+
+                    Compare preços entre diversas lojas, descubra promoções
+                    e escolha a melhor oferta sem sair de casa.
+
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="/produtos" class="btn-primary">
+                        Ver Produtos
+                    </a>
+
+                    <a href="/categorias" class="btn-secondary">
+                        Categorias
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- DESTAQUES -->
+
+        <section class="container">
+
+            <div class="section-title">
+
+                <h2>Destaques da Semana</h2>
+
+                <p>Confira alguns móveis em alta.</p>
+
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🛋️
+                    </div>
+
+                    <h3>Sofás</h3>
+
+                    <p>
+                        Modelos modernos e confortáveis para sua sala.
+                    </p>
+
+                    <a href="/produtos" class="btn-primary">
+                        Ver mais
+                    </a>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🛏️
+                    </div>
+
+                    <h3>Camas</h3>
+
+                    <p>
+                        Mais conforto para suas noites de descanso.
+                    </p>
+
+                    <a href="/produtos" class="btn-primary">
+                        Ver mais
+                    </a>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🪑
+                    </div>
+
+                    <h3>Mesas</h3>
+
+                    <p>
+                        Perfeitas para sala de jantar ou escritório.
+                    </p>
+
+                    <a href="/produtos" class="btn-primary">
+                        Ver mais
+                    </a>
+
+                </div>
+
+                <div class="card">
+
+                    <div class="card-image">
+                        🚪
+                    </div>
+
+                    <h3>Guarda-Roupas</h3>
+
+                    <p>
+                        Organização e espaço para o seu quarto.
+                    </p>
+
+                    <a href="/produtos" class="btn-primary">
+                        Ver mais
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- VANTAGENS -->
+
+        <section class="vantagens">
+
+            <div class="container vantagens-grid">
+
+                <div>
+
+                    <h3>🚚 Entrega Rápida</h3>
+
+                    <p>
+                        Compare preços e encontre a melhor opção perto de você.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3>💰 Melhor Preço</h3>
+
+                    <p>
+                        Nosso objetivo é facilitar sua economia.
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h3>⭐ Qualidade</h3>
+
+                    <p>
+                        Produtos de diversas lojas em um único lugar.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <%- include("layouts/footer") %>
+
+</body>
+
+</html>

@@ -1,72 +1,580 @@
-:root {
-    --primary-color: #c0392b;
-    --secondary-color: #e67e22;
-    --bg-color: #f4f6f7;
-    --card-bg: #ffffff;
-    --text-color: #2c3e50;
-    --border-radius: 8px;
-  }
-  
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  
-  .container {
-    max-width: 1100px;
-    margin: 20px auto;
-    padding: 0 20px;
-    flex: 1;
-  }
-  
-  /* Navbar */
-  .navbar {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .navbar a {
-    color: white;
-    text-decoration: none;
-    margin-right: 15px;
-    font-weight: 500;
-  }
-  
-  .navbar a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Botões */
-  .btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px 18px;
-    border: none;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-  }
-  
-  .btn-primary:hover {
-    background-color: #a93226;
-  }
-  
-  /* Footer */
-  .footer {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: auto;
-  }
+/* ===========================
+   CASAS POTIGUAR
+   =========================== */
+
+   :root{
+    --primary:#c8102e;
+    --primary-dark:#a20d25;
+    --secondary:#ffffff;
+    --background:#f5f5f5;
+    --text:#333333;
+    --gray:#777777;
+    --shadow:0 6px 18px rgba(0,0,0,.15);
+    --radius:12px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--background);
+    color:var(--text);
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container{
+
+    width:90%;
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:18px 0;
+
+    box-shadow:var(--shadow);
+
+}
+
+.header-container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.logo{
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:32px;
+
+    font-weight:bold;
+
+}
+
+.logo span{
+
+    color:white;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.search-input{
+
+    width:300px;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px 0 0 8px;
+
+    outline:none;
+
+}
+
+.search-button{
+
+    padding:12px 18px;
+
+    border:none;
+
+    background:#8f0d21;
+
+    color:white;
+
+    cursor:pointer;
+
+    border-radius:0 8px 8px 0;
+
+}
+
+.search-button:hover{
+
+    background:#6d0918;
+
+}
+
+/* ===========================
+   MENU
+=========================== */
+
+.navbar{
+
+    background:white;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.nav-container{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+}
+
+.nav-links{
+
+    display:flex;
+
+    list-style:none;
+
+    gap:25px;
+
+}
+
+.nav-links a{
+
+    text-decoration:none;
+
+    color:#444;
+
+    font-weight:bold;
+
+    transition:.3s;
+
+}
+
+.nav-links a:hover{
+
+    color:var(--primary);
+
+}
+
+.btn-login{
+
+    text-decoration:none;
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:10px 22px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.btn-login:hover{
+
+    background:var(--primary-dark);
+
+}
+
+/* ===========================
+   HERO
+=========================== */
+
+.hero{
+
+    height:70vh;
+
+    background:linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=1600");
+
+    background-size:cover;
+
+    background-position:center;
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+.hero-text{
+
+    width:90%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    color:white;
+
+}
+
+.tag{
+
+    background:white;
+
+    color:var(--primary);
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+}
+
+.hero h1{
+
+    font-size:55px;
+
+    margin:25px 0 20px;
+
+}
+
+.hero p{
+
+    max-width:650px;
+
+    font-size:20px;
+
+    line-height:1.6;
+
+}
+
+/* ===========================
+   BOTÕES
+=========================== */
+
+.hero-buttons{
+
+    margin-top:35px;
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+.btn-primary{
+
+    background:var(--primary);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.btn-primary:hover{
+
+    background:var(--primary-dark);
+
+}
+
+.btn-secondary{
+
+    background:white;
+
+    color:var(--primary);
+
+    text-decoration:none;
+
+    padding:14px 28px;
+
+    border-radius:10px;
+
+    transition:.3s;
+
+}
+
+.btn-secondary:hover{
+
+    background:#eeeeee;
+
+}
+
+/* ===========================
+   TÍTULOS
+=========================== */
+
+.section-title{
+
+    text-align:center;
+
+    margin:70px 0 40px;
+
+}
+
+.section-title h2{
+
+    color:var(--primary);
+
+    font-size:38px;
+
+}
+
+.section-title p{
+
+    color:var(--gray);
+
+    margin-top:10px;
+
+}
+
+/* ===========================
+   CARDS
+=========================== */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+    margin-bottom:70px;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    text-align:center;
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.card-image{
+
+    font-size:60px;
+
+    margin-bottom:20px;
+
+}
+
+.card h3{
+
+    color:var(--primary);
+
+    margin-bottom:15px;
+
+}
+
+.card p{
+
+    color:#666;
+
+    margin-bottom:20px;
+
+}
+
+/* ===========================
+   VANTAGENS
+=========================== */
+
+.vantagens{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:70px 0;
+
+}
+
+.vantagens-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+    gap:30px;
+
+    text-align:center;
+
+}
+
+.vantagens h3{
+
+    margin-bottom:15px;
+
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer{
+
+    background:#222;
+
+    color:white;
+
+    margin-top:60px;
+
+}
+
+.footer-container{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    gap:40px;
+
+    padding:50px 0;
+
+}
+
+.footer h2{
+
+    margin-bottom:15px;
+
+}
+
+.footer h3{
+
+    margin-bottom:15px;
+
+}
+
+.footer a{
+
+    display:block;
+
+    color:white;
+
+    text-decoration:none;
+
+    margin-bottom:10px;
+
+}
+
+.footer a:hover{
+
+    color:#ffbaba;
+
+}
+
+.footer-copy{
+
+    text-align:center;
+
+    padding:20px;
+
+    border-top:1px solid #444;
+
+}
+
+/* ===========================
+   RESPONSIVO
+=========================== */
+
+@media(max-width:900px){
+
+.header-container{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.search-input{
+
+    width:220px;
+
+}
+
+.hero h1{
+
+    font-size:38px;
+
+}
+
+.hero p{
+
+    font-size:18px;
+
+}
+
+.footer-container{
+
+    grid-template-columns:1fr;
+
+    text-align:center;
+
+}
+
+.nav-container{
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.nav-links{
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+}
+
+}
