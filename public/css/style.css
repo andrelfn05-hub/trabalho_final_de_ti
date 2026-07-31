@@ -2,7 +2,7 @@
    CASAS POTIGUAR
    =========================== */
 
-   :root{
+:root{
     --primary:#c8102e;
     --primary-dark:#a20d25;
     --secondary:#ffffff;
@@ -576,5 +576,67 @@ body{
     flex-direction:column;
 
 }
+
+}
+
+.card img {
+
+  width: 100%;
+
+  height: 180px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  margin-bottom: 15px;
+
+}
+
+
+
+.card button {
+
+  background-color: #c90024;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 20px;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+}
+
+
+
+.card button:hover {
+
+  background-color: #8f001b;
+
+}
+
+
+
+.produtos {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 30px;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+.card {
+
+  width: 280px;
 
 }
