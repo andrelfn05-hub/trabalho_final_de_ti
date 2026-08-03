@@ -24,7 +24,7 @@ router.get("/", (req: Request, res: Response) => {
 router.get("/:email", (req: Request, res: Response) => {
   try {
     const { email } = req.params;
-    const usuario = usuariosDB.find((u) => u.email === email.);
+    const usuario = usuariosDB.find((u) => u.email === email);
 
     if (!usuario) {
       return res.status(404).json({ erro: "Usuário não encontrado." });
@@ -69,7 +69,7 @@ router.post("/", (req: Request, res: Response) => {
 router.put("/:email", (req: Request, res: Response) => {
   try {
     const { email } = req.params;
-    const usuario = usuariosDB.find((u) => u.email === email.);
+    const usuario = usuariosDB.find((u) => u.email === email);
 
     if (!usuario) {
       return res.status(404).json({ erro: "Usuário não encontrado." });
