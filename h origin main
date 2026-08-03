@@ -1,0 +1,53 @@
+[33m2c94ab0[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m feat: criar tela de login
+[33md057d87[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge branch 'main' com atualizações do repositório
+[33m62d67c0[m feat: criar tela de listagem de produtos
+[33mebc2ebd[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m8415be2[m produto routes
+[33m603e89e[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33ma8743d3[m de novo pra garantir
+[33m26d57ce[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m8700b99[m style: ajustar renderizacao EJS e estilizacao base da home
+[33m284393c[m upload middleware
+[33m00d6167[m style: ajustar renderização do EJS e estilização da Home
+[33mc2594c4[m controller dos produtos e authguard
+[33mf538d94[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m9ddb8aa[m Update README.md
+[33mb0b8187[m  model e repositório do usuario e  auth controler
+[33m2733ea4[m Add files via upload
+[33mad45473[m Resolve conflitos da main
+[33m13bb519[m feat: criar entidade Produto e Repository com persistência em JSON
+[33m9b3c16f[m Merge pull request #1 from MattheusIsaac/patch-1
+[33m620cd8e[m Add Mattheus Isaac to README as Jest Tester
+[33mea14ed3[m adição da const sofá
+[33mcb3de67[m correção dos valores no index
+[33mbfdac8d[m index e model adicionados
+[33m698983e[m Iniciando models
+[33m5ffd97f[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m8c5cc7e[m medels dfo usuario e produto
+[33mcc17795[m feat: estrutura base mvc com entidades, rotas e middlewares
+[33m6fe7451[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m480ecfc[m feat: criar layout base da aplicação
+[33mae6e1ee[m Update README.md
+[33m13e60ee[m feat: configurar arquivos estáticos e uploads
+[33mcd7b069[m Update README.md
+[33m1cb57e6[m Add files via upload
+[33mae8e889[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m139864d[m feat: configurar arquivos estáticos e uploads
+[33m5df66a7[m Add files via upload
+[33mc5cd0c7[m feat: configurar arquivos estáticos e uploads
+[33m6f0c286[m Add files via upload
+[33mf45de6c[m feat: configurar mecanismo de views EJS
+[33ma3c592f[m feat: configurar servidor Express
+[33m103e1ed[m Merge branch 'main' of https://github.com/andrelfn05-hub/trabalho_final_de_ti
+[33m0630de9[m Update README.md
+[33md242606[m Add files via upload
+[33m4c7d3ee[m Organização de pastas
+[33mae1d751[m Update README.md
+[33m0e4aedf[m Add files via upload
+[33m8bd4cda[m Delete Diagrama.png
+[33m75ace68[m Add files via upload
+[33m9f23f52[m Create README.md
+[33m0aec831[m Update README.md
+[33m6886ac3[m Update README.md
+[33m9213670[m update README.md
+[33m1a0d92d[m Initial commit
