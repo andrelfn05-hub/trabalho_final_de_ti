@@ -1,11 +1,21 @@
-import { Router } from "express";
-import { ProductController } from "../controllers/ProdutoController";
-import AuthGuard from "../middlewares/authGuard";
+import { Request, Response, NextFunction } from "express";
 
-const router = Router();
+export const authGuard = (req: Request, res: Response, next: NextFunction): void => {
+  // Acessa a propriedade session com um cast simples para evitar o erro de tipagem
+  const reqSession = (req as any).session;
 
-// Rota protegida: o AuthGuard verifica o login antes de chamar o controller
-router.get("/products", AuthGuard, ProductController.showProducts);
-router.get("/products/create", AuthGuard, ProductController.showCreateProduct);
+  if (reqSession && reqSession.usuario) {
+    return next();
+  }
 
-export default router;
+  // Se a requisição for feita via API (JSON/Fetch)
+  if (req.headers["content-type"] === "application/json" || req.xhr) {
+    res.status(401).json({ mensagem: "Acesso negado. Faça login para continuar." });
+    return;
+  }
+
+  // Redireciona para a tela de login
+  res.redirect("/login");
+};
+
+export default authGuard;
