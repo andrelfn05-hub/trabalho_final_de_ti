@@ -1,95 +1,97 @@
 import { Request, Response } from "express";
+import { ProdutoRepository } from "../repositories/ProdutoRepository";
+import { Produto } from "../entities/Produto";
+
+const produtoRepo = new ProdutoRepository();
 
 export const ProductController = {
-    // Exibe a página com a lista de produtos
-    showProducts: async (req: Request, res: Response) => {
-        try {
-            // LÓGICA PARA BUSCAR PRODUTOS NO BANCO DE DADOS AQUI
-            // Exemplo mock (remova depois):
-            const products = [
-                { id: 1, name: "Camisa", price: 79.90, description: "Camisa de algodão" },
-                { id: 2, name: "Calça Jeans", price: 129.90, description: "Calça jeans slim fit" },
-            ];
-            res.render("products/list", { products, error: null });
-        } catch (error) {
-            return res.status(500).render("products/list", { products: [], error: "Erro ao carregar produtos." });
-        }
-    },
+  showProducts: async (req: Request, res: Response) => {
+    try {
+      const products = produtoRepo.listar();
+      res.render("products/list", { products, error: null });
+    } catch (error) {
+      return res.status(500).render("products/list", { products: [], error: "Erro ao carregar produtos." });
+    }
+  },
 
-    // Exibe o formulário para criar um novo produto
-    showCreateProduct: (req: Request, res: Response) => {
-        res.render("products/create", { error: null });
-    },
+  showCreateProduct: (req: Request, res: Response) => {
+    res.render("products/create", { error: null });
+  },
 
-    // Processa a criação de um novo produto
-    processCreateProduct: async (req: Request, res: Response) => {
-        const { name, price, description } = req.body;
+  processCreateProduct: async (req: Request, res: Response) => {
+    const { name, price, description, category } = req.body;
+    const reqFile = (req as any).file;
+    const imagemUrl = reqFile ? `/uploads/${reqFile.filename}` : "";
 
-        try {
-            // Validação básica
-            if (!name || !price) {
-                return res.render("products/create", { error: "Nome e preço são obrigatórios." });
-            }
+    try {
+      if (!name || !price || !category) {
+        return res.render("products/create", { error: "Nome, preço e categoria são obrigatórios." });
+      }
 
-            // LÓGICA PARA SALVAR O NOVO PRODUTO NO BANCO DE DADOS AQUI
-            console.log(`Novo produto criado: ${name}, ${price}, ${description}`);
+      // Ordem do construtor de Produto: nome, categoria, descricao, preco, imagemUrl
+      const novoProduto = new Produto(
+        String(name),
+        String(category),
+        String(description || ""),
+        Number(price),
+        String(imagemUrl)
+      );
 
-            return res.redirect("/products");
-        } catch (error) {
-            return res.status(500).render("products/create", { error: "Erro ao criar produto." });
-        }
-    },
+      if (!novoProduto.validar()) {
+        return res.render("products/create", { error: "Dados inválidos para o produto." });
+      }
 
-    // Exibe o formulário para editar um produto existente
-    showEditProduct: async (req: Request, res: Response) => {
-        const idParam = req.params.id;
-const id = Array.isArray(idParam) ? idParam[0] : idParam;
-        try {
-            // LÓGICA PARA BUSCAR O PRODUTO PELO ID NO BANCO DE DADOS AQUI
-            // Exemplo mock (remova depois):
-            const product = { id: parseInt(id), name: "Camisa Editada", price: 89.90, description: "Camisa de algodão editada" }; // Simula um produto encontrado
+      produtoRepo.criar(novoProduto);
+      return res.redirect("/products");
+    } catch (error: any) {
+      return res.render("products/create", { error: error.message || "Erro ao criar produto." });
+    }
+  },
 
-            if (!product) {
-                return res.status(404).redirect("/products");
-            }
-            res.render("products/edit", { product, error: null });
-        } catch (error) {
-            return res.status(500).redirect("/products");
-        }
-    },
+  showEditProduct: async (req: Request, res: Response) => {
+    const id = String(req.params.id);
+    try {
+      const product = produtoRepo.buscarPorId(id);
+      if (!product) {
+        return res.status(404).redirect("/products");
+      }
+      res.render("products/edit", { product: product.toJSON(), error: null });
+    } catch (error) {
+      return res.status(500).redirect("/products");
+    }
+  },
 
-    // Processa a edição de um produto existente
-    processEditProduct: async (req: Request, res: Response) => {
-        const { id } = req.params;
-        const { name, price, description } = req.body;
+  processEditProduct: async (req: Request, res: Response) => {
+    const id = String(req.params.id);
+    const { name, price, description, category } = req.body;
+    const reqFile = (req as any).file;
 
-        try {
-            // Validação básica
-            if (!name || !price) {
-                // Pode ser melhor renderizar a página de edição com o erro
-                return res.redirect(`/products/edit/${id}`);
-            }
+    try {
+      const produtoExistente = produtoRepo.buscarPorId(id);
+      if (!produtoExistente) {
+        return res.status(404).redirect("/products");
+      }
 
-            // LÓGICA PARA ATUALIZAR O PRODUTO NO BANCO DE DADOS AQUI
-            console.log(`Produto ${id} atualizado: ${name}, ${price}, ${description}`);
+      if (name) produtoExistente.nome = String(name);
+      if (price !== undefined) produtoExistente.preco = Number(price);
+      if (description) produtoExistente.descricao = String(description);
+      if (category) produtoExistente.categoria = String(category);
+      if (reqFile) produtoExistente.imagemUrl = `/uploads/${reqFile.filename}`;
 
-            return res.redirect("/products");
-        } catch (error) {
-            return res.status(500).redirect("/products");
-        }
-    },
+      produtoRepo.atualizar(id, produtoExistente);
+      return res.redirect("/products");
+    } catch (error: any) {
+      return res.status(500).redirect("/products");
+    }
+  },
 
-    // Exclui um produto
-    deleteProduct: async (req: Request, res: Response) => {
-        const { id } = req.params;
-
-        try {
-            // LÓGICA PARA EXCLUIR O PRODUTO DO BANCO DE DADOS AQUI
-            console.log(`Produto ${id} excluído.`);
-
-            return res.redirect("/products");
-        } catch (error) {
-            return res.status(500).redirect("/products");
-        }
-    },
+  deleteProduct: async (req: Request, res: Response) => {
+    const id = String(req.params.id);
+    try {
+      produtoRepo.remover(id);
+      return res.redirect("/products");
+    } catch (error) {
+      return res.status(500).redirect("/products");
+    }
+  },
 };
