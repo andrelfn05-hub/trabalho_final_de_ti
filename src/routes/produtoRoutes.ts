@@ -1,108 +1,104 @@
-import { Request, Response } from "express";
+import { Router, Request, Response } from "express";
+import { Produto } from "../entities/Produto";
 
-// Estende a interface Request para incluir a propriedade file do Multer
-declare module 'express-serve-static-core' {
-    interface Request {
-        file?: Express.Multer.File;
+const router = Router();
+
+// Simulação de banco de dados em memória
+let produtosDB: Produto[] = [];
+
+// --- GET /produtos - Listar todos os produtos ---
+router.get("/", (req: Request, res: Response) => {
+  try {
+    const listaProdutos = produtosDB.map((prod) => prod.toJSON());
+    return res.json(listaProdutos);
+  } catch (error: any) {
+    return res.status(500).json({ erro: "Erro ao buscar produtos.", detalhe: error.message });
+  }
+});
+
+// --- GET /produtos/:id - Buscar um produto específico pelo ID ---
+router.get("/:id", (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const produto = produtosDB.find((p) => p.id === id);
+
+    if (!produto) {
+      return res.status(404).json({ erro: "Produto não encontrado." });
     }
-}
 
-export const ProductController = {
-    // Exibe a página com a lista de produtos
-    showProducts: async (req: Request, res: Response) => {
-        try {
-            // LÓGICA PARA BUSCAR PRODUTOS NO BANCO DE DADOS AQUI
-            // Exemplo mock (remova depois):
-            const products = [
-                { id: 1, name: "Camisa", price: 79.90, description: "Camisa de algodão", imageUrl: "/uploads/camisa.jpg" },
-                { id: 2, name: "Calça Jeans", price: 129.90, description: "Calça jeans slim fit", imageUrl: "/uploads/calca.jpg" },
-            ];
-            res.render("products/list", { products, error: null });
-        } catch (error) {
-            return res.status(500).render("products/list", { products: [], error: "Erro ao carregar produtos." });
-        }
-    },
+    return res.json(produto.toJSON());
+  } catch (error: any) {
+    return res.status(500).json({ erro: "Erro ao buscar produto.", detalhe: error.message });
+  }
+});
 
-    // Exibe o formulário para criar um novo produto
-    showCreateProduct: (req: Request, res: Response) => {
-        res.render("products/create", { error: null });
-    },
+// --- POST /produtos - Criar um novo produto ---
+router.post("/", (req: Request, res: Response) => {
+  try {
+    // Instancia o Produto a partir do corpo da requisição usando o método estático fromJSON
+    const novoProduto = Produto.fromJSON(req.body);
 
-    // Processa a criação de um novo produto
-    processCreateProduct: async (req: Request, res: Response) => {
-        const { name, price, description } = req.body;
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : undefined; // Pega o caminho do arquivo upado
+    // Executa a validação do modelo
+    if (!novoProduto.validar()) {
+      return res.status(400).json({ erro: "Dados de produto inválidos." });
+    }
 
-        try {
-            // Validação básica
-            if (!name || !price) {
-                return res.render("products/create", { error: "Nome e preço são obrigatórios." });
-            }
+    produtosDB.push(novoProduto);
 
-            // LÓGICA PARA SALVAR O NOVO PRODUTO NO BANCO DE DADOS AQUI
-            console.log(`Novo produto criado: ${name}, ${price}, ${description}, Imagem: ${imageUrl}`);
+    return res.status(201).json({
+      mensagem: "Produto criado com sucesso!",
+      produto: novoProduto.toJSON(),
+    });
+  } catch (error: any) {
+    // Captura os erros lançados pelos SETTERS (ex: preço negativo, nome curto)
+    return res.status(400).json({ erro: error.message });
+  }
+});
 
-            return res.redirect("/products");
-        } catch (error) {
-            return res.status(500).render("products/create", { error: "Erro ao criar produto." });
-        }
-    },
+// --- PUT /produtos/:id - Atualizar dados de um produto ---
+router.put("/:id", (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const produto = produtosDB.find((p) => p.id === id);
 
-    // Exibe o formulário para editar um produto existente
-    showEditProduct: async (req: Request, res: Response) => {
-        const idParam = req.params.id;
-        const id = Array.isArray(idParam) ? idParam[0] : idParam;
-        try {
-            // LÓGICA PARA BUSCAR O PRODUTO PELO ID NO BANCO DE DADOS AQUI
-            // Exemplo mock (remova depois):
-            const product = { id: parseInt(id), name: "Camisa Editada", price: 89.90, description: "Camisa de algodão editada", imageUrl: "/uploads/camisa-editada.jpg" }; // Simula um produto encontrado
+    if (!produto) {
+      return res.status(404).json({ erro: "Produto não encontrado." });
+    }
 
-            if (!product) {
-                return res.status(404).redirect("/products");
-            }
-            res.render("products/edit", { product, error: null });
-        } catch (error) {
-            return res.status(500).redirect("/products");
-        }
-    },
+    const { nome, descricao, preco, categoria, imagemUrl } = req.body;
 
-    // Processa a edição de um produto existente
-    processEditProduct: async (req: Request, res: Response) => {
-        const idParam = req.params.id;
-        const id = Array.isArray(idParam) ? idParam[0] : idParam;
-        const { name, price, description } = req.body;
-        const imageUrl = req.file ? `/uploads/${req.file.filename}` : undefined; // Pega o caminho do arquivo upado
+    // Atualiza os campos através dos Setters (que acionam as validações do Model)
+    if (nome !== undefined) produto.nome = nome;
+    if (descricao !== undefined) produto.descricao = descricao;
+    if (preco !== undefined) produto.preco = Number(preco);
+    if (categoria !== undefined) produto.categoria = categoria;
+    if (imagemUrl !== undefined) produto.imagemUrl = imagemUrl;
 
-        try {
-            // Validação básica
-            if (!name || !price) {
-                // Pode ser melhor renderizar a página de edição com o erro
-                return res.redirect(`/products/edit/${id}`);
-            }
+    return res.json({
+      mensagem: "Produto atualizado com sucesso!",
+      produto: produto.toJSON(),
+    });
+  } catch (error: any) {
+    return res.status(400).json({ erro: error.message });
+  }
+});
 
-            // LÓGICA PARA ATUALIZAR O PRODUTO NO BANCO DE DADOS AQUI
-            console.log(`Produto ${id} atualizado: ${name}, ${price}, ${description}, Imagem: ${imageUrl}`);
+// --- DELETE /produtos/:id - Remover produto ---
+router.delete("/:id", (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const index = produtosDB.findIndex((p) => p.id === id);
 
-            return res.redirect("/products");
-        } catch (error) {
-            return res.status(500).redirect("/products");
-        }
-    },
+    if (index === -1) {
+      return res.status(404).json({ erro: "Produto não encontrado." });
+    }
 
-    // Exclui um produto
-    deleteProduct: async (req: Request, res: Response) => {
-        const idParam = req.params.id;
-        const id = Array.isArray(idParam) ? idParam[0] : idParam;
+    produtosDB.splice(index, 1);
 
-        try {
-            // LÓGICA PARA EXCLUIR O PRODUTO DO BANCO DE DADOS AQUI
-            console.log(`Produto ${id} excluído.`);
+    return res.json({ mensagem: "Produto removido com sucesso." });
+  } catch (error: any) {
+    return res.status(500).json({ erro: "Erro ao deletar produto.", detalhe: error.message });
+  }
+});
 
-            return res.redirect("/products");
-        } catch (error) {
-            return res.status(500).redirect("/products");
-        }
-    },
-};
-
-
+export default router;
