@@ -1,11 +1,21 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.querySelectorAll(".btn-comprar").forEach(botao => {
 
-    const botoesComprar = document.querySelectorAll(".btn-comprar");
+    botao.addEventListener("click", () => {
 
-    botoesComprar.forEach(botao => {
-        botao.addEventListener("click", () => {
-            alert("Produto adicionado ao carrinho!");
-        });
+        window.location.href = "/products/detalhe";
+
     });
 
 });
+
+const adicionar = document.querySelector(".btn-adicionar");
+
+if(adicionar){
+
+    adicionar.addEventListener("click", ()=>{
+
+        alert("Produto adicionado ao carrinho!");
+
+    });
+
+}

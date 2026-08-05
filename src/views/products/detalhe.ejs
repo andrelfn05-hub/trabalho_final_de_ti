@@ -15,91 +15,83 @@
 
 <body>
 
-    <%- include("../layouts/header") %>
+    <%- include('../layouts/header') %>
 
-    <%- include("../layouts/menu") %>
+    <%- include('../layouts/menu') %>
 
     <main class="container">
 
-        <section class="produto-detalhe">
+        <div class="detalhe-produto">
 
-            <div class="produto-imagem-grande">
+            <div class="imagem-produto">
 
-                🛋️
+                <img src="/img/sofa.jpg" alt="Sofá Moderno">
 
             </div>
 
-            <div class="produto-info">
+            <div class="info-produto">
 
                 <span class="categoria">
-
-                    Sala de Estar
-
+                    Sala
                 </span>
 
-                <h1>Sofá Retrátil Premium</h1>
-
-                <p class="descricao">
-
-                    Sofá moderno, confortável e espaçoso.
-                    Ideal para salas grandes e ambientes elegantes.
-                    Estrutura em madeira maciça e revestimento premium.
-
-                </p>
+                <h1>Sofá Moderno 3 Lugares</h1>
 
                 <div class="avaliacao">
 
                     ⭐⭐⭐⭐⭐
 
-                    <span>(4.9)</span>
+                    <span>(125 avaliações)</span>
 
                 </div>
 
+                <p class="preco-antigo">
+                    R$ 2.799,90
+                </p>
+
                 <h2 class="preco">
-
-                    R$ 2.499,90
-
+                    R$ 2.299,90
                 </h2>
 
                 <p class="parcelamento">
+                    ou 10x de R$ 229,99 sem juros
+                </p>
 
-                    ou em até <strong>10x de R$ 249,99</strong>
+                <p class="descricao">
+
+                    Sofá moderno de três lugares,
+                    produzido em madeira de reflorestamento,
+                    revestido em tecido premium e espuma de alta densidade.
 
                 </p>
 
-                <div class="acoes">
+                <div class="beneficios">
 
-                    <button class="btn-primary">
+                    ✅ Frete Grátis
 
-                        Comprar
+                    <br>
 
-                    </button>
+                    ✅ Garantia de 12 meses
 
-                    <button class="btn-secondary">
+                    <br>
 
-                        Favoritar
-
-                    </button>
+                    ✅ Entrega em todo o Brasil
 
                 </div>
 
-                <div class="informacoes">
+                <button class="btn-adicionar">
 
-                    <p>🚚 Entrega para todo o Brasil</p>
+                    Adicionar ao Carrinho
 
-                    <p>🔒 Compra 100% segura</p>
-
-                    <p>↩️ Troca em até 7 dias</p>
-
-                </div>
+                </button>
 
             </div>
 
-        </section>
+        </div>
 
     </main>
 
-    <%- include("../layouts/footer") %>
+    <%- include('../layouts/footer') %>
 
 </body>
 
