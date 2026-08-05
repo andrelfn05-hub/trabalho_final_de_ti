@@ -6,15 +6,18 @@ import { Usuario } from "../entities/Usuario";
 const usuarioRepo = new UsuarioRepository();
 
 export const AuthController = {
+  // GET /login -> Exibe a tela de login
   showLogin: (req: Request, res: Response) => {
     res.render("auth/login", { error: null });
   },
 
+  // POST /login -> Processa a autenticação
   processLogin: async (req: Request, res: Response) => {
-    const { email, password } = req.body;
+    const { email, password, senha } = req.body;
+    const senhaInformada = password || senha;
 
     try {
-      if (!email || !password) {
+      if (!email || !senhaInformada) {
         return res.render("auth/login", { error: "Informe e-mail e senha." });
       }
 
@@ -23,60 +26,79 @@ export const AuthController = {
         return res.render("auth/login", { error: "E-mail ou senha inválidos." });
       }
 
-      const senhaValida = await bcrypt.compare(password, usuario.senha);
+      const senhaValida = await bcrypt.compare(senhaInformada, usuario.senha);
       if (!senhaValida) {
         return res.render("auth/login", { error: "E-mail ou senha inválidos." });
       }
 
-      // Cast em (req as any) evita erro de compilação da propriedade session
-      (req as any).session.usuario = usuario.toJSON();
-
+      (req as any).session.usuario = typeof usuario.toJSON === "function" ? usuario.toJSON() : usuario;
       return res.redirect("/");
     } catch (error: any) {
-      return res.status(500).render("auth/login", { error: "Erro interno no servidor." });
+      console.error("Erro no login:", error);
+      return res.status(500).render("auth/login", { error: "Erro interno no servidor ao tentar logar." });
     }
   },
 
+  // GET /register -> Exibe a tela de cadastro
   showRegister: (req: Request, res: Response) => {
     res.render("auth/register", { error: null });
   },
 
+  // POST /register -> Cria o usuário e grava no dados/usuarios.json
   processRegister: async (req: Request, res: Response) => {
-    const { name, email, password, confirmPassword } = req.body;
+    const { name, nome, email, password, senha, confirmPassword, confirmarSenha, role } = req.body;
+
+    const nomeFinal = name || nome;
+    const senhaFinal = password || senha;
+    const confirmacaoFinal = confirmPassword || confirmarSenha;
 
     try {
-      if (!name || !email || !password) {
-        return res.render("auth/register", { error: "Preencha todos os campos obrigatórios." });
+      // 1. Validação de campos obrigatórios
+      if (!nomeFinal || !email || !senhaFinal) {
+        return res.render("auth/register", { error: "Nome, e-mail e senha são obrigatórios." });
       }
 
-      if (password !== confirmPassword) {
+      if (senhaFinal !== confirmacaoFinal) {
         return res.render("auth/register", { error: "As senhas não coincidem." });
       }
 
-      const jaExiste = await usuarioRepo.findByEmail(email);
-      if (jaExiste) {
+      // 2. Verifica se o e-mail já existe
+      const usuarioExistente = await usuarioRepo.findByEmail(email);
+      if (usuarioExistente) {
         return res.render("auth/register", { error: "Este e-mail já está cadastrado." });
       }
 
-      const senhaHash = await bcrypt.hash(password, 10);
+      // 3. Criptografa a senha
+      const senhaHash = await bcrypt.hash(senhaFinal, 10);
 
-      // Instanciação compatível com a ordem do construtor de Usuario
-      const novoUsuario = new Usuario(name, email, senhaHash, "cliente");
-      await usuarioRepo.create(novoUsuario);
+     // 4. Instancia o novo usuário usando a sua entidade
+const papelUsuario = role ? String(role) : "cliente";
 
+const novoUsuario = new Usuario(
+  String(nomeFinal),
+  String(email),
+  senhaHash,
+  papelUsuario as any // O 'as any' previne a incompatibilidade de tipos do TypeScript
+);
+
+// 5. Salva no arquivo JSON via repositório
+await usuarioRepo.create(novoUsuario);
+
+      console.log(`✅ Usuário cadastrado e salvo com sucesso: ${email}`);
+
+      // 6. Redireciona para a tela de login
       return res.redirect("/login");
     } catch (error: any) {
+      console.error("Erro no cadastro:", error);
       return res.status(500).render("auth/register", { error: error.message || "Erro ao cadastrar usuário." });
     }
   },
 
+  // GET /logout -> Encerra a sessão
   logout: (req: Request, res: Response) => {
     const reqSession = (req as any).session;
     if (reqSession) {
-      reqSession.destroy((err: any) => {
-        if (err) {
-          return res.status(500).send("Erro ao realizar logout.");
-        }
+      reqSession.destroy(() => {
         res.redirect("/login");
       });
     } else {

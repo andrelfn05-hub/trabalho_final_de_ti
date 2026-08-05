@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "nome": "jaoo lucas",
+    "email": "joaolrpr16@gmail.com",
+    "senha": "$2b$10$49GSXNJ5yupgytgUJNtNYuZSV6.dxmh6v1se1/4uaC8BxSOvKMV0S",
+    "role": "cliente"
+  }
+]
