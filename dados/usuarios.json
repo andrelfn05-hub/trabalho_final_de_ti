@@ -4,5 +4,11 @@
     "email": "joaolrpr16@gmail.com",
     "senha": "$2b$10$49GSXNJ5yupgytgUJNtNYuZSV6.dxmh6v1se1/4uaC8BxSOvKMV0S",
     "role": "cliente"
+  },
+  {
+    "nome": "israel",
+    "email": "israelahmedaires@gmail.com",
+    "senha": "$2b$10$pHt9WWnC4SwQ45j2rGrWfuy9IITPmq4MMWlFq.u4zKqvxlTRuDUCy",
+    "role": "cliente"
   }
 ]
