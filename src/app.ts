@@ -4,11 +4,11 @@ import session from "express-session";
 
 // Importação das rotas com caminho absoluto a partir de src
 import authRouter from "../src/routes/authRoutes";
-import produtoRouter from "../src/routes/produtoRoutes";
+import produtoRouter from "../src/routes/productRoutes";
 import categoriaRouter from "../src/routes/categoriaRoutes";
 import pedidoRouter from "../src/routes/pedidoRoutes";
 import usuarioRouter from "../src/routes/usuarioRoutes";
-
+import cartRoutes from "../src/routes/cartRoutes";
 const app = express();
 
 // Configuração do motor de templates EJS
@@ -41,7 +41,7 @@ app.use("/products", produtoRouter);
 app.use("/categorias", categoriaRouter);
 app.use("/pedidos", pedidoRouter);
 app.use("/usuarios", usuarioRouter);
-
+app.use("/cart", cartRoutes);
 // Rota Inicial
 app.get("/", (req, res) => {
   const usuario = (req as any).session?.usuario || null;
