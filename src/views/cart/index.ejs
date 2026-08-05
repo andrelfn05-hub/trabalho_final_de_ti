@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Carrinho - Casas Potiguar</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+    <%- include('../layouts/header') %>
+
+    <%- include('../layouts/menu') %>
+
+    <main class="container">
+
+        <h1 class="titulo-pagina">Meu Carrinho</h1>
+
+        <div id="lista-carrinho" class="lista-carrinho">
+
+            <p>Seu carrinho está vazio.</p>
+
+        </div>
+
+        <div class="total-carrinho">
+
+            <h2>Total: <span id="valor-total">R$ 0,00</span></h2>
+
+            <button class="btn-finalizar">
+                Finalizar Compra
+            </button>
+
+        </div>
+
+    </main>
+
+    <%- include('../layouts/footer') %>
+
+    <script src="/js/cart.js"></script>
+
+</body>
+
+</html>
