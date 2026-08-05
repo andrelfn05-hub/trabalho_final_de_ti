@@ -48,4 +48,7 @@ app.get("/", (req, res) => {
   res.render("index", { usuario });
 });
 
+import carrinhoRouter from "./routes/carrinhoRoutes";
+app.use("/", carrinhoRouter);
+
 export default app;
